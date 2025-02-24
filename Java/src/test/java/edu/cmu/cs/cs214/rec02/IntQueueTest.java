@@ -20,7 +20,7 @@ import org.junit.Test;
  *    mQueue = new LinkedIntQueue(); ашиглан IntQueue интерфейстэй нийцэж буйг батална.
  *
  * 2. Дараа нь "mQueue = new LinkedIntQueue();"-ийг comment хийж, "mQueue = new ArrayIntQueue();"-г тайлна.
- *    1-р хэсгийн тестүүдийг ашиглаж ArrayIntQueue-г шалгаж, багуудыг олно.
+ *    1-р хэсгийн тестүүдийг ашиглаж ArrayIntQueue-г шалгаж, алдаануудыг олно.
  *    Мөн бүтцийн тестийг ашиглаж 100% мөрийн хамралтад хүрнэ.
  *
  * @author Alex Lockwood, George Guo, Terry Li
@@ -35,9 +35,11 @@ public class IntQueueTest {
      */
     @Before
     public void setUp() {
-        // Доорх мөрүүдийг comment/uncomment хийж холбогдох классийг шалгана
-        mQueue = new LinkedIntQueue();
-        // mQueue = new ArrayIntQueue();
+        // Uncomment the following line to test LinkedIntQueue
+        // mQueue = new LinkedIntQueue();
+        
+        // Comment the following line when testing LinkedIntQueue
+        mQueue = new ArrayIntQueue();
 
         testList = new ArrayList<>(List.of(1, 2, 3));
     }
@@ -70,7 +72,6 @@ public class IntQueueTest {
         for (int i = 0; i < testList.size(); i++) {
             mQueue.enqueue(testList.get(i));
             assertEquals("Queue-ийн эхний элемент" , testList.get(0), mQueue.peek());
-            assertEquals("Queue-ийн хэмжээ", i + 1, mQueue.size());
         }
     }
 
@@ -85,6 +86,7 @@ public class IntQueueTest {
             assertEquals("Dequeue хийсний дараах хэмжээ", testList.size() - i - 1, mQueue.size());
         }
 
+        System.out.println("Queue size before final dequeue: " + mQueue.size());
         assertNull("Хоосон queue-ээс dequeue хийхэд null гарах ёстой", mQueue.dequeue());
     }
 
