@@ -23,7 +23,10 @@ jobs:
           java-version: '17'
 
       - name: Compile Java code
-        run: javac -cp ".;junit-4.13.2.jar;hamcrest-core-1.3.jar" *.java
+        run: |
+          $files = Get-ChildItem -Filter *.java | ForEach-Object { $_.Name }
+          javac -cp ".;junit-4.13.2.jar;hamcrest-core-1.3.jar" $files
+        shell: pwsh
 
       - name: Run tests with JUnit
         run: java -cp ".;junit-4.13.2.jar;hamcrest-core-1.3.jar" org.junit.runner.JUnitCore IntQueueTest
